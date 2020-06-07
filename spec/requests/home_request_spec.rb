@@ -11,7 +11,7 @@ RSpec.describe "Homes", type: :request do
     end
 
     it 'should have the correct title' do
-        expect(response.body).to match /Home \| Ruby on Rails Tutorial Sample App/
+        expect(response.body).to match /Ruby on Rails Tutorial Sample App/
     end
   end
 end
