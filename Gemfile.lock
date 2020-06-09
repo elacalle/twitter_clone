@@ -93,6 +93,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     autoprefixer-rails (9.7.6)
       execjs
+    bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
@@ -207,6 +208,8 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    shoulda-matchers (4.3.0)
+      activesupport (>= 4.2.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -251,6 +254,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   bootstrap-sass (= 3.4.1)
   byebug
@@ -268,6 +272,7 @@ DEPENDENCIES
   rspec-support!
   sass-rails (>= 6)
   selenium-webdriver
+  shoulda-matchers
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3 (~> 1.4)
