@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "Helps", type: :request do
+RSpec.describe "Users", type: :request do
+
   before :each do
-    get help_url
+    get signup_path
   end
 
   describe "GET /index" do
@@ -11,7 +12,8 @@ RSpec.describe "Helps", type: :request do
     end
 
     it 'should have the correct title' do
-        expect(response.body).to match /<title>Help \| Ruby on Rails Tutorial Sample App<\/title>/
+      expect(response.body).to match /Sign up \| Ruby on Rails Tutorial Sample App/
     end
   end
+
 end
