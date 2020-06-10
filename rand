@@ -1,0 +1,63 @@
+
+SiteLayouts
+  home pagelinks
+[32m    layouts links[0m
+
+ApplicationHelper
+  full title helper is empty
+[32m    Just show moto[0m
+  full title helper is not empty
+[32m    Shows the title Contact with moto[0m
+[32m    Shows the title Help with moto[0m
+[32m    Shows the title About with moto[0m
+
+User
+  validations
+[32m    is expected to validate that :name cannot be empty/falsy[0m
+[32m    is expected to validate that :email cannot be empty/falsy[0m
+[32m    is expected to validate that the length of :name is at most 50[0m
+[32m    is expected to validate that the length of :email is at most 255[0m
+[32m    is expected to validate that :email is case-sensitively unique[0m
+[32m    is expected to validate that the length of :password is at least 6[0m
+[32m    is expected not to allow :email to be ‹"user@example,com"›[0m
+[32m    is expected not to allow :email to be ‹"user_at_foo.org"›[0m
+[32m    is expected not to allow :email to be ‹"user.name@example."›[0m
+[32m    is expected not to allow :email to be ‹"foo@bar_baz.com"›[0m
+[32m    is expected not to allow :email to be ‹"foo@bar+baz.com"›[0m
+[32m    should be valid[0m
+
+Abouts
+  GET /index
+[32m    return http succes[0m
+[32m    should have the correct title[0m
+
+Contacts
+  GET /
+[32m    return http success[0m
+[32m    should have the correct title[0m
+
+Helps
+  GET /index
+[32m    returns http success[0m
+[32m    should have the correct title[0m
+
+Homes
+  GET /index
+[32m    returns http success[0m
+[32m    should have the correct title[0m
+
+SiteLayouts
+  GET /site_layouts
+[32m    have layout links[0m
+
+Users
+  GET /index
+[32m    returns http success[0m
+[32m    should have the correct title[0m
+  POST /create
+    Invalid data
+[32m      User is not created[0m
+
+Finished in 0.5691 seconds (files took 0.89902 seconds to load)
+[32m29 examples, 0 failures[0m
+
