@@ -11,8 +11,9 @@ class UsersController < ApplicationController
     @user = User.new(allowed_params)
 
     if @user.save
+      reset_session
+      log_in @user
       flash[:success] = "Welcome to Sample App!"
-
       redirect_to @user
     elsif
       render 'new'
