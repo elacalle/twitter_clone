@@ -68,13 +68,50 @@ RSpec.describe "Sessions", type: :request do
         expect(response).to render_template(:show)
       end
 
-      it 'show the logged in links' do
+      it 'show the user links' do
         follow_redirect!
 
         expect(response.body).to_not match /Log in/
         expect(response.body).to match /Log out/
         expect(response.body).to match /Profile/
         expect(is_logged_in?).to be_truthy
+      end
+
+      describe 'login with valid information followed by logout' do
+        it 'show guest links' do
+          expect(is_logged_in?).to be_truthy
+
+          delete logout_path
+
+          follow_redirect!
+
+          expect(is_logged_in?).to be_falsey
+          expect(response).to render_template('home/index')
+
+          delete logout_path
+
+          follow_redirect!
+          expect(response.body).to match /Log in/
+          expect(response.body).to_not match /Log out/
+          expect(response.body).to_not match /Profile/
+        end
+      end
+    end
+
+    describe 'remembering' do
+      context 'enabled' do
+        it 'cookie is empty' do
+          log_in_as(@user, remember_me: 0)
+
+          expect(cookies[:remember_token]).to be_nil
+        end
+
+        it 'cookie is not empty' do
+          log_in_as(@user, remember_me: 1)
+          jar = ActionDispatch::Cookies::CookieJar.build(request, cookies.to_hash)
+
+          expect(jar.encrypted[:remember_token]).to eq assigns(:user).remember_token
+        end
       end
     end
   end

@@ -15,8 +15,13 @@ RSpec.describe User, type: :model do
       it { should_not allow_value(email).for(:email) }
     end
 
-    it 'should be valid' do
-      expect(user.valid?).to be_truthy
+    describe 'authenticated' do
+      it "should return false with nil digest" do
+        user.remember_digest = nil
+        user.save
+
+        expect(user.authenticated? '').to eq false
+      end
     end
   end
 end
