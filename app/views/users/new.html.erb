@@ -5,18 +5,7 @@
     <%= render 'shared/error_messages' %>
 
     <%= form_with model: @user, local: true do |f| %>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-
-      <%= f.label :email%>
-      <%= f.email_field :email %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password%>
-
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation %>
-
+      <%= render partial: "form", locals: {f: f} %>
       <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>
   </div>

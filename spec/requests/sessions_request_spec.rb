@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "Sessions", type: :request do
-  before :all do
+  before :each do
     password = '12345678'
 
     @user = User.create(
-        name:  'User',
-        email: 'user@example.com',
-        password: password,
-        password_confirmation: password
+      name: 'User',
+      email: 'user@example.com',
+      password: password,
+      password_confirmation: password
     )
   end
 
@@ -22,11 +22,11 @@ RSpec.describe "Sessions", type: :request do
   describe "POST /create" do
     describe "login with invalid information" do
       before :each do
-        post login_path , params: {
-            session: {
-                email:    '',
-                password: ''
-            }
+        post login_path, params: {
+          session: {
+            email: '',
+            password: '',
+          },
         }
       end
 
@@ -34,7 +34,7 @@ RSpec.describe "Sessions", type: :request do
         it 'cant login' do
           post login_path, params: { session: { email: @user.email, password: '' } }
 
-          expect(subject).to_not redirect_to User.last
+          expect(subject).not_to redirect_to User.last
         end
       end
 
@@ -47,7 +47,7 @@ RSpec.describe "Sessions", type: :request do
         it "flash do not persists" do
           get root_path
 
-          expect(flash[:danger]).to_not match(/Invalid user\/password combination/)
+          expect(flash[:danger]).not_to match(/Invalid user\/password combination/)
         end
       end
     end
@@ -57,8 +57,8 @@ RSpec.describe "Sessions", type: :request do
         post login_path, params: {
           session: {
             email: @user.email,
-            password: @user.password
-          }
+            password: @user.password,
+          },
         }
       end
 
@@ -71,7 +71,7 @@ RSpec.describe "Sessions", type: :request do
       it 'show the user links' do
         follow_redirect!
 
-        expect(response.body).to_not match /Log in/
+        expect(response.body).not_to match /Log in/
         expect(response.body).to match /Log out/
         expect(response.body).to match /Profile/
         expect(is_logged_in?).to be_truthy
@@ -92,8 +92,8 @@ RSpec.describe "Sessions", type: :request do
 
           follow_redirect!
           expect(response.body).to match /Log in/
-          expect(response.body).to_not match /Log out/
-          expect(response.body).to_not match /Profile/
+          expect(response.body).not_to match /Log out/
+          expect(response.body).not_to match /Profile/
         end
       end
     end
@@ -117,13 +117,12 @@ RSpec.describe "Sessions", type: :request do
   end
 
   describe "POST /destroy" do
-
     before :each do
       post login_path, params: {
         session: {
           email: @user.email,
-          password: @user.password
-        }
+          password: @user.password,
+        },
       }
 
       delete logout_path
@@ -138,8 +137,8 @@ RSpec.describe "Sessions", type: :request do
         follow_redirect!
 
         expect(response.body).to match /Log in/
-        expect(response.body).to_not match /Log out/
-        expect(response.body).to_not match /Profile/
+        expect(response.body).not_to match /Log out/
+        expect(response.body).not_to match /Profile/
       end
 
       it 'redirects to root url' do

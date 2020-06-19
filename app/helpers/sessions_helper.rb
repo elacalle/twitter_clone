@@ -21,8 +21,8 @@ module SessionsHelper
       @current_user ||= user if session[:session_token] == user.session_token
     elsif (user = User.find_by(id: cookies.encrypted[:user_id]))
       if user.authenticated?(cookies.encrypted[:remember_token])
-          log_in user
-          @current_user ||= user
+        log_in user
+        @current_user ||= user
       end
     end
   end
@@ -35,5 +35,13 @@ module SessionsHelper
     forget(current_user)
     reset_session
     @current_user = nil
+  end
+
+  def current_user?(user)
+    user && user == current_user
+  end
+
+  def store_location
+    session[:forwarding_url] = request.original_url if request.get?
   end
 end
