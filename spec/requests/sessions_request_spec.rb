@@ -8,7 +8,8 @@ RSpec.describe "Sessions", type: :request do
       name: 'User',
       email: 'user@example.com',
       password: password,
-      password_confirmation: password
+      password_confirmation: password,
+      activated: true
     )
   end
 

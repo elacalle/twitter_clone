@@ -12,7 +12,8 @@ User.create(
   email: "ernestohlacalle@gmail.com",
   password: password,
   password_confirmation: password,
-  admin: true
+  admin: true,
+  activated_at: Time.zone.now
 )
 
 99.times do |n|
@@ -21,6 +22,7 @@ User.create(
     email: "email#{n}@example.com",
     password: password,
     password_confirmation: password,
-    admin: false
+    activated: false,
+    activated_at: Time.zone.now
   )
 end

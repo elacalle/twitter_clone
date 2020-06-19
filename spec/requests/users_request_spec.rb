@@ -10,7 +10,8 @@ RSpec.describe 'Users', type: :request do
       name: 'Name',
       email: 'example@example.com',
       password: '12345678',
-      password_confirmation: '12345678'
+      password_confirmation: '12345678',
+      activated: true
     )
 
     @admin = User.create(
@@ -18,6 +19,7 @@ RSpec.describe 'Users', type: :request do
       email: 'admin@example.com',
       password: '12345678',
       password_confirmation: '12345678',
+      activated: true,
       admin: true 
     )
 
@@ -26,6 +28,7 @@ RSpec.describe 'Users', type: :request do
         name: Faker::Name.name,
         email: "email#{n}@example.com",
         password: password,
+        activated: true,
         password_confirmation: password
       )
     end
@@ -114,8 +117,21 @@ RSpec.describe 'Users', type: :request do
         end.to change(User, :count)
 
         follow_redirect!
-        expect(response.body).to match(/Welcome to Sample App!/)
-        expect(subject).to render_template('users/show')
+        #expect(response.body).to match(/Welcome to Sample App!/)
+        # expect(subject).to render_template('users/show')
+      end
+
+      it 'send an activation email' do
+        expect do
+          post users_path, params: {
+            user: {
+              name: 'user',
+              email: 'user@valid.com',
+              password: '12345678',
+              password_confirmation: '12345678',
+            },
+          }
+        end.to change { ActionMailer::Base.deliveries.size }.by(1)
       end
     end
   end
@@ -126,7 +142,8 @@ RSpec.describe 'Users', type: :request do
         name: 'Name1',
         email: 'example1@example.com',
         password: '12345678',
-        password_confirmation: '12345678'
+        password_confirmation: '12345678',
+        activated: true
       )
 
       log_in_as @user

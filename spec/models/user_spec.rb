@@ -20,7 +20,7 @@ RSpec.describe User, type: :model do
         user.remember_digest = nil
         user.save
 
-        expect(user.authenticated? '').to eq false
+        expect(user.authenticated?(:remember, '')).to eq false
       end
     end
   end
