@@ -11,9 +11,10 @@ class SessionsController < ApplicationController
         log_in @user
         params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
         session[:session_token] = @user.session_token
+
         redirect_to forwarding_url || @user
       else
-        flash.now[:warning] = 'Account not activated.'
+        flash[:warning] = 'Account not activated.'
         redirect_to root_url
       end
     elsif

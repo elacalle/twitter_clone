@@ -5,6 +5,12 @@ ruby '2.5.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
+# Image processing
+gem 'image_processing', '1.9.3'
+# Minimagick 
+gem 'mini_magick', '4.9.5'
+# Active storage validation
+gem 'active_storage_validations', '0.8.9'
 # Bootstrap framework
 gem 'bootstrap-sass', '3.4.1'
 # Use sqlite3 as the database for Active Record
@@ -41,6 +47,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rubocop-airbnb'
   gem 'faker' 
+  gem 'factory_bot_rails'
 end
 
 group :development do
