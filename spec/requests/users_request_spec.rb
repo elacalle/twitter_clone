@@ -117,8 +117,6 @@ RSpec.describe 'Users', type: :request do
         end.to change(User, :count)
 
         follow_redirect!
-        #expect(response.body).to match(/Welcome to Sample App!/)
-        # expect(subject).to render_template('users/show')
       end
 
       it 'send an activation email' do
@@ -313,6 +311,26 @@ RSpec.describe 'Users', type: :request do
           follow_redirect!
           expect(response).to render_template('home/index')
         end
+      end
+    end
+  end
+
+  describe 'When user is not logged in' do
+    context 'follow a user' do
+      it 'gets redirected' do
+        get following_user_path(@user)
+
+        follow_redirect!
+        expect(response).to render_template('sessions/new')
+      end
+    end
+
+    context 'unfollow a user' do
+      it 'gets redirected' do
+        get followers_user_path(@user)
+
+        follow_redirect!
+        expect(response).to render_template('sessions/new')
       end
     end
   end
